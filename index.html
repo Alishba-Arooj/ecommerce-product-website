@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendMart - E-Commerce Store</title>
+    
+    <!-- 7. Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Reset & Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* 7. Google Font for Content */
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif; /* 7. Google Font for Headings */
+        }
+
+        /* 1. Header with Logo */
+        header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        /* 2. Navigation Menu & 13. Z-Index for Overlapping */
+        nav {
+            background-color: #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* 13. Z-index for overlay */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li a {
+            display: block;
+            color: #f1f5f9;
+            text-decoration: none;
+            padding: 15px 25px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #0284c7;
+            color: #ffffff;
+        }
+
+        /* 3 & 8. Banner Section with Background Image and Gradient */
+        .banner {
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 30px;
+        }
+
+        .banner h1 {
+            font-size: 44px;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        .banner p {
+            font-size: 18px;
+            color: #e2e8f0;
+        }
+
+        /* Main Container: Sidebar + Product Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* 5. Sidebar & 9. Customized List Styles */
+        aside {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            height: fit-content;
+        }
+
+        aside h2 {
+            font-size: 22px;
+            color: #0f172a;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #0284c7;
+            padding-bottom: 5px;
+        }
+
+        .category-list {
+            list-style-type: '🛍️ '; /* 9. Customized list style */
+            padding-left: 25px;
+        }
+
+        .category-list li {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .category-list li a {
+            text-decoration: none;
+            color: #334155;
+            transition: color 0.3s;
+        }
+
+        .category-list li a:hover {
+            color: #0284c7;
+        }
+
+        /* 4. Product Section & 10. display: inline-block for Cards */
+        main {
+            flex: 3;
+        }
+
+        .product-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .product-container {
+            font-size: 0; /* Clear inline-block spacing gap */
+        }
+
+        .product-card {
+            display: inline-block; /* 10. Inline block requirement */
+            width: calc(33.333% - 14px);
+            margin-right: 21px;
+            margin-bottom: 25px;
+            vertical-align: top;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 14px; /* Reset font size for content */
+            position: relative; /* 12. Relative positioning for child absolute badge */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s;
+        }
+
+        .product-card:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 11. Opacity Effect on Product Images */
+        .product-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0.88; /* 11. Opacity effect */
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-img {
+            opacity: 1; /* Opacity full on hover */
+        }
+
+        /* 12. Position Relative and Absolute for Product Labels */
+        .badge {
+            position: absolute; /* 12. Absolute positioning */
+            top: 25px;
+            left: 25px;
+            background-color: #ef4444;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            z-index: 10; /* 13. Z-index for label overlay */
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 12px 0 6px 0;
+            color: #0f172a;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #16a34a;
+            margin-bottom: 12px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #0369a1;
+        }
+
+        /* 6. Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        /* 14. Media Queries for Responsiveness (At least 2 queries) */
+        
+        /* Media Query 1: Tablet / Medium Screens */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .product-card {
+                width: calc(50% - 10px);
+                margin-right: 20px;
+            }
+
+            .product-card:nth-child(3n) {
+                margin-right: 20px;
+            }
+
+            .product-card:nth-child(2n) {
+                margin-right: 0;
+            }
+        }
+
+        /* Media Query 2: Mobile Screens */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner h1 {
+                font-size: 30px;
+            }
+
+            .product-card {
+                width: 100%;
+                margin-right: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header with Website Logo/Name -->
+    <header>
+        <a href="#" class="logo">🛒 TrendMart</a>
+        <div>Quality Products Delivered Fast</div>
+    </header>
+
+    <!-- 2. Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#deals">Deals</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- 3. Banner Section -->
+    <section class="banner" id="home">
+        <h1>Exclusive Summer Collection</h1>
+        <p>Upgrade your lifestyle with up to 50% OFF on selected products!</p>
+    </section>
+
+    <!-- Main Content Layout -->
+    <div class="container" id="products">
+
+        <!-- 5. Sidebar Containing Product Categories -->
+        <aside id="categories">
+            <h2>Categories</h2>
+            <ul class="category-list">
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Fashion & Apparel</a></li>
+                <li><a href="#">Home Appliances</a></li>
+                <li><a href="#">Footwear & Shoes</a></li>
+                <li><a href="#">Accessories</a></li>
+            </ul>
+        </aside>
+
+        <!-- 4. Product Section with at least 6 Products -->
+        <main class="product-section">
+            <h2>Featured Products</h2>
+            
+            <div class="product-container">
+
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <span class="badge">HOT</span>
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&auto=format&fit=crop" alt="Wireless Headphones" class="product-img">
+                    <h3>Wireless Headphones</h3>
+                    <p class="price">$59.99</p>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <span class="badge" style="background-color: #16a34a;">SALE</span>
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop" alt="Smart Watch" class="product-img">
+                    <h3>Smart Watch Series X</h3>
+                    <p class="price">$129.99</p>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <span class="badge" style="background-color: #0284c7;">NEW</span>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop" alt="Running Shoes" class="product-img">
+                    <h3>Pro Running Shoes</h3>
+                    <p class="price">$89.99</p>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <span class="badge">HOT</span>
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&auto=format&fit=crop" alt="Gaming Headset" class="product-img">
+                    <h3>RGB Gaming Headset</h3>
+                    <p class="price">$74.50</p>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <span class="badge" style="background-color: #16a34a;">SALE</span>
+                    <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&auto=format&fit=crop" alt="Classic Sneakers" class="product-img">
+                    <h3>Urban Classic Sneakers</h3>
+                    <p class="price">$65.00</p>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <span class="badge" style="background-color: #0284c7;">NEW</span>
+                    <img src="https://images.unsplash.com/photo-1609592807963-41a4e21a2245?w=400&auto=format&fit=crop" alt="Smart Speaker" class="product-img">
+                    <h3>Mini Smart Speaker</h3>
+                    <p class="price">$45.00</p>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- 6. Footer -->
+    <footer>
+        <p>&copy; 2026 TrendMart Online Store. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
